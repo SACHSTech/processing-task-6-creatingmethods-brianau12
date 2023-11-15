@@ -1,5 +1,10 @@
 import processing.core.PApplet;
 
+/**
+* A program that draws a pattern chattering emojis and lollipops that change colour.
+* @author: B. Au
+*/
+
 public class Sketch extends PApplet {
 	  
   public void settings() {
@@ -7,25 +12,23 @@ public class Sketch extends PApplet {
     size(400, 400);
   }
 
-  
   public void setup() {
     // Background colour of screen
     background(255);
   }
 
-  
   public void draw() {
       // Draws yellow emoji
       for (int y = 40; y <= 340; y += 100) {
         for (int x = 50; x <= 350; x += 100) {
             emoji(x, y, 40, 40);
         }
-    }
+     }
       
-      // Draws stick figures
-      for (int intSecondY = 90; intSecondY < 390; intSecondY += 100){
-        for (int intSecondX = 80; intSecondX < 380; intSecondX += 100){
-          stickFigure(intSecondX, intSecondY, 15, 15, (float) 0.5 * intSecondY + 50, (float) 0.57 * intSecondY + 20, (float) 0.8 * intSecondY + 20);
+      // Draws lollipops
+      for (int intSecondY = 80; intSecondY < 380; intSecondY += 100){
+        for (int intSecondX = 100; intSecondX < 390; intSecondX += 100){
+          stickLollipop(intSecondX, intSecondY, 15, 15, (float) 0.5 * intSecondY + 50, (float) 0.57 * intSecondY + 20, (float) 0.8 * intSecondY + 20);
         }
       }
     
@@ -35,12 +38,12 @@ public class Sketch extends PApplet {
       stroke(0);
       if(mousePressed){
         ellipse(mouseX, mouseY, 10, 10);
+        }
       }
-    
-  }
 
   /**
    * Draws an emoji at different locations specified by the method parameters
+   * @author B. Au
    * @param emojiX is the x coordinate 
    * @param emojiY is the y coordinate
    * @param emojiWidth is the width
@@ -48,7 +51,7 @@ public class Sketch extends PApplet {
    */
   public void emoji(float emojiX, float emojiY, float emojiWidth, float emojiHeight) {
     
-    // Sun middle
+    // Face middle
     stroke(0);
     fill(254, 234, 30);
     ellipse(emojiX, emojiY, emojiWidth, emojiHeight);
@@ -86,51 +89,47 @@ public class Sketch extends PApplet {
   }
 
  /**
-   * Draws stick figures at various locations with changing colours specified by the method parameters
-   * @param stickX is the X coordinate 
-   * @param stickY is the Y coordinate
-   * @param stickWidth is the width 
-   * @param stickHeight is the height
+   * Draws lollipops at various locations with changing colours specified by the method parameters
+   * @author B. Au
+   * @param lollipopX is the X coordinate 
+   * @param lollipopY is the Y coordinate
+   * @param lollipopWidth is the width 
+   * @param lollipopHeight is the height
    * @param colourR is the Red in RGB
    * @param colourG is the Green in RGB
    * @param colourB is the Blue in RGB
    */
-  public void stickFigure(float stickX, float stickY, float stickWidth, float stickHeight, float colourR, float colourG, float colourB) {
-    // Head of stick figure
+  public void stickLollipop(float lollipopX, float lollipopY, float lollipopWidth, float lollipopHeight, float colourR, float colourG, float colourB) {
+    // lollipop outer loop
     stroke(colourR, colourG, colourB);
-    noFill();
-    ellipse(stickX, stickY, stickWidth, stickHeight);
+    fill(235, 137, 52);
+    ellipse(lollipopX, lollipopY, lollipopWidth, lollipopHeight);
 
-    // Body of stick figure
+    // lollipop head
     stroke(colourR, colourG, colourB);
-    noFill();
-    line(stickX, stickY + 8, stickX, stickY + 28);
+    fill(190, 232, 50);
+    triangle(lollipopX - 8, lollipopY - 8, lollipopX + 8, lollipopY - 8, lollipopX, lollipopY - 20);
 
-    // Right arm of stick figure
+    // Second section of lollipop
     stroke(colourR, colourG, colourB);
-    noFill();
-    line(stickX, stickY + 14, stickX + 14, stickY + 6);
+    fill(135, 130, 60);
+    ellipse(lollipopX, lollipopY, lollipopWidth - 5, lollipopHeight - 5);
 
-    // Left arm of stick figure
+    // Center of lollipop
     stroke(colourR, colourG, colourB);
-    noFill();
-    line(stickX, stickY + 14, stickX - 7, stickY + 24);
+    fill(232, 51, 22);
+    ellipse(lollipopX, lollipopY, lollipopWidth - 10, lollipopHeight - 10);
 
-    // Right leg of stick figure
+    // Stick of lollipop
     stroke(colourR, colourG, colourB);
     noFill();
-    line(stickX, stickY + 28, stickX + 12, stickY + 42);
-
-    // Left leg of stick figure
-    stroke(colourR, colourG, colourB);
-    noFill();
-    line(stickX, stickY + 28, stickX - 12, stickY + 42);
+    line(lollipopX, lollipopY + 8, lollipopX, lollipopY + 28);
 
   }
-
   
   /**
    * Draws colour of pixel that is right of the mouse
+   * @author B. Au
    * @param intPixel the pixels to the right of mouse
    * @return the colour of the pixel that is the parameter to the right of the mouse when pressed
    */
